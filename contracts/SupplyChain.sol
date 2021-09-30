@@ -86,7 +86,7 @@ contract SupplyChain {
     _;
   }
   modifier received(uint _sku) {
-    require(items[_sku].state == State.Received, "received");
+    require(items[_sku].state == State.Received, "not received");
     _;
   }
 
@@ -94,26 +94,26 @@ contract SupplyChain {
     // 1. Set the owner to the transaction sender
     owner = msg.sender;
     // 2. Initialize the sku count to 0. Question, is this necessary? No
-    //   => A non initialized variable is by default the 0, false, or empty variable. No need to initialize skuCount.
+    //   => A non initialized variable is by default the 0, false, or empty variable. 
+    //      No need to initialize skuCount.(and it would cost extra gas)
   }
 
   function addItem(string memory _name, uint _price) public returns (bool) {
-    // 1. Create a new item and put in array  ==> In array ? What's the point of the mapping with a skuCount ?
+    // 1. Create a new item and put in array  ==> In array ? aren't we using a mapping and a tracking uint?
     // 2. Increment the skuCount by one
     // 3. Emit the appropriate event
     // 4. return true
 
     // hint:
-    items[skuCount] = Item({
-     name: _name, 
-     sku: skuCount, 
-     price: _price, 
-     state: State.ForSale, 
-     seller: payable(msg.sender), 
-     buyer: payable(address(0))
-    });
-    items[skuCount].state = State.ForSale;
-    
+    Item memory item = Item(
+    _name, 
+    skuCount, 
+    _price, 
+    State.ForSale, 
+    payable(msg.sender), 
+    payable(address(0))
+    );
+    items[skuCount] = item;
     skuCount++;
     emit LogForSale(skuCount);
     return true;
