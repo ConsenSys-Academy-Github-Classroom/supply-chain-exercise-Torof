@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.7.6;
 pragma abicoder v2;
 
 contract SupplyChain {
@@ -159,12 +159,12 @@ contract SupplyChain {
 
   // Uncomment the following code block. it is needed to run tests
    function fetchItem(uint _sku) public view
-     returns (string memory name, uint sku, uint price, uint state, address seller, address buyer) 
+     returns (string memory name, uint sku, uint price, State state, address seller, address buyer) 
    {
      name = items[_sku].name;
      sku = items[_sku].sku;
      price = items[_sku].price;
-     state = uint(items[_sku].state);
+     state = items[_sku].state;
      seller = items[_sku].seller;
      buyer = items[_sku].buyer;
      return (name, sku, price, state, seller, buyer);
