@@ -70,6 +70,7 @@ contract("SupplyChain", function (accounts) {
 
       before(() => {
         subjectStruct = ItemStruct(SupplyChain);
+        console.log(subjectStruct)
         assert(
           subjectStruct !== null, 
           "The contract should define an `Item Struct`"
@@ -116,8 +117,7 @@ contract("SupplyChain", function (accounts) {
         );
         assert(
           isType(subjectStruct)("state")("State"), 
-          "`state` should be of type `State`"
-        );
+          "`state` should be of type `State`")
       });
 
       it("should have a `seller`", () => {

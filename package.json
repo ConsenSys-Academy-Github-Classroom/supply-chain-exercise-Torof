@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "truffle-contract-size": "^2.0.1",
+    "truffle-plugin-debugger": "^0.0.2"
+  }
+}
